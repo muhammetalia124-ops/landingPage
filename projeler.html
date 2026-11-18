@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="description" content="Muhammet Ali'nin yazılım projeleri ve kullandığı teknolojiler.">
+    <title>Projeler — Muhammet Ali</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
+    <header class="projects-header" id="top">
+        <nav class="site-nav container" aria-label="Ana gezinme">
+            <a class="brand" href="index.html" aria-label="Muhammet Ali ana sayfa">
+                <span class="brand-mark">MA</span>
+                <span>Muhammet Ali<span class="brand-period">.</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#hakkimda">Hakkımda</a>
+                <a href="#main" aria-current="page">Projeler</a>
+                <a href="index.html#teknolojiler">Teknolojiler</a>
+                <a href="index.html#iletisim">İletişim</a>
+                <label class="theme-control" for="theme-switch">
+                    <span aria-hidden="true">☾</span>
+                    <input type="checkbox" id="theme-switch" role="switch" aria-label="Açık temayı etkinleştir">
+                    <span class="theme-track" aria-hidden="true"></span>
+                    <span aria-hidden="true">☀</span>
+                </label>
+            </div>
+        </nav>
+        <div class="projects-hero container">
+            <p class="eyebrow"><span class="status-dot"></span> DENEME, ÖĞRENME, GELİŞTİRME</p>
+            <h1>Üzerinde çalıştığım<br><span>projeler.</span></h1>
+            <p>Her proje yeni bir şey öğrenmek ve öğrendiklerimi çalışan bir ürüne dönüştürmek için bir fırsat.</p>
+        </div>
+    </header>
+
+    <main id="main" class="container projects-main">
+        <p class="eyebrow section-kicker project-count">02 PROJE · KAYNAK KODLARI AÇIK</p>
+        <div class="project-list">
+            <article class="project-entry">
+                <div class="project-entry-top">
+                    <span class="project-entry-number">01</span>
+                    <span class="project-entry-type">BACKEND / FULL-STACK</span>
+                </div>
+                <h2>IntegrationHub — Monolitik REST API</h2>
+                <p>C# ile geliştirilmiş, JWT ile oturum doğrulayan ve katmanlı mimariye sahip monolitik bir REST API. İsteği seçilen hizmete göre ilgili servise yönlendirir, sonuçları kullanıcıya döndürür ve başarılı işlemleri geçmişe kaydeder; kullanıcılar seçtikleri hizmet üzerinden sorgulama ve hesaplama yapabilir.</p>
+                <div class="tag-list"><span>C#</span><span>ASP.NET Core Web API</span><span>JWT</span><span>Entity Framework Core</span><span>SQL Server</span><span>Layered Architecture</span></div>
+                <details class="project-details">
+                    <summary>Detaylı açıklamayı gör <span aria-hidden="true">▾</span></summary>
+                    <div class="project-details-body">
+                        <h4>Proje ne yapıyor?</h4>
+                        <p>IntegrationHub, kullanıcıların hesap oluşturup e-posta ve şifreyle giriş yaptığı; giriş sonrası seçtiği hizmete göre sorgulama ve hesaplama yapabildiği bir web uygulamasıdır. Backend tarafı ASP.NET Core Web API ile geliştirildi.</p>
+                        <h4>Backend nasıl çalışıyor?</h4>
+                        <p>API, JWT ile oturum doğrular; seçilen hizmete göre isteği ilgili servise yönlendirir, sonuçları kullanıcıya döndürür ve başarılı işlemleri kullanıcının geçmişine kaydeder. Backend API, Application, Domain ve Infrastructure katmanlarına ayrılmıştır.</p>
+                        <h4>Yetkilendirme ve yönetim</h4>
+                        <p>Kullanıcılar geçmiş işlemlerini görüntüleyebilir. Yönetici kullanıcıları listeleyip ekleyebilir, düzenleyebilir, devre dışı bırakabilir, şifrelerini değiştirebilir ve işlem geçmişlerini yönetebilir.</p>
+                        <h4>Veri yapısı</h4>
+                        <p>SQL Server üzerinde kullanıcı hesapları, kullanıcı işlem geçmişi ve harici servis önbellekleri ayrı veritabanlarında tutulur; böylece önbellek verileri kullanıcı geçmişinden ayrı kalır.</p>
+                    </div>
+                </details>
+                <div class="project-entry-actions">
+                    <a class="button button-primary" href="https://integrationhub-y0m3.onrender.com" target="_blank" rel="noopener noreferrer">Canlı demoyu aç <span aria-hidden="true">↗</span></a>
+                    <a class="button button-outline" href="https://github.com/muhammetalia124-ops/integrationHub" target="_blank" rel="noopener noreferrer">Kaynak kodu <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+
+            <article class="project-entry">
+                <div class="project-entry-top">
+                    <span class="project-entry-number">02</span>
+                    <span class="project-entry-type">FRONTEND / WEB</span>
+                </div>
+                <h2>Kişisel Portföy Sitesi</h2>
+                <p>Kişisel bilgilerimi, kullandığım teknolojileri ve projelerimi tanıtan; farklı ekran boyutlarına uyum sağlayan kişisel web sitesi.</p>
+                <div class="tag-list"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive tasarım</span></div>
+                <div class="project-entry-actions">
+                    <a class="button button-outline" href="https://github.com/muhammetalia124-ops/landingPage" target="_blank" rel="noopener noreferrer">Kaynak kodu <span aria-hidden="true">↗</span></a>
+                    <a class="text-link" href="index.html">Portföyü görüntüle <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+        </div>
+        <div class="projects-back">
+            <a class="text-link" href="index.html">← Ana sayfaya dön</a>
+        </div>
+    </main>
+
+    <footer class="site-footer container">
+        <a class="brand" href="index.html"><span class="brand-mark">MA</span><span>Muhammet Ali<span class="brand-period">.</span></span></a>
+        <a class="back-to-top" href="#top" aria-label="Sayfanın başına dön">Yukarı çık ↑</a>
+    </footer>
+</body>
+</html>

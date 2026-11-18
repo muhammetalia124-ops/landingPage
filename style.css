@@ -1001,6 +1001,23 @@ body.light-theme .project-visual {
     line-height: 1.9;
 }
 
+.project-details-body ul {
+    margin: 6px 0 0;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.project-details-body li + li {
+    margin-top: 6px;
+}
+
+.project-details-body li strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
 .projects-back {
     margin-top: 29px;
 }

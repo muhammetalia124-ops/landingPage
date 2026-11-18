@@ -51,14 +51,24 @@
                 <details class="project-details">
                     <summary>Detaylı açıklamayı gör <span aria-hidden="true">▾</span></summary>
                     <div class="project-details-body">
-                        <h4>Proje ne yapıyor?</h4>
-                        <p>IntegrationHub, kullanıcıların hesap oluşturup e-posta ve şifreyle giriş yaptığı; giriş sonrası seçtiği hizmete göre sorgulama ve hesaplama yapabildiği bir web uygulamasıdır. Backend tarafı ASP.NET Core Web API ile geliştirildi.</p>
-                        <h4>Backend nasıl çalışıyor?</h4>
-                        <p>API, JWT ile oturum doğrular; seçilen hizmete göre isteği ilgili servise yönlendirir, sonuçları kullanıcıya döndürür ve başarılı işlemleri kullanıcının geçmişine kaydeder. Backend API, Application, Domain ve Infrastructure katmanlarına ayrılmıştır.</p>
-                        <h4>Yetkilendirme ve yönetim</h4>
-                        <p>Kullanıcılar geçmiş işlemlerini görüntüleyebilir. Yönetici kullanıcıları listeleyip ekleyebilir, düzenleyebilir, devre dışı bırakabilir, şifrelerini değiştirebilir ve işlem geçmişlerini yönetebilir.</p>
-                        <h4>Veri yapısı</h4>
-                        <p>SQL Server üzerinde kullanıcı hesapları, kullanıcı işlem geçmişi ve harici servis önbellekleri ayrı veritabanlarında tutulur; böylece önbellek verileri kullanıcı geçmişinden ayrı kalır.</p>
+                        <p>IntegrationHub, kullanıcıların günlük hayatta sıkça ihtiyaç duyduğu finansal ve anlık bilgilere tek bir merkezden hızlıca ulaşmasını sağlayan modern bir ASP.NET Core 8 web uygulamasıdır. Arayüz ve arka plan servislerinin tek bir çatı altında sunulduğu proje; temiz kod yapısı, güvenli kimlik doğrulama sistemi ve akıllı önbellekleme mekanizmasıyla uçtan uca eksiksiz bir deneyim sunar.</p>
+
+                        <h4>Uygulamanın Sunduğu Temel Özellikler</h4>
+                        <ul>
+                            <li><strong>Kapsamlı Altın Hesaplama:</strong> Gram, çeyrek, yarım, tam, cumhuriyet, reşat, ata, gremse, has, 14/18/22 ayar, beşli, hamit, ikibuçuk ve ons olmak üzere 16 farklı altın türü için anlık olarak Türk Lirası ve adet/gram arası çift yönlü dönüşüm yapar.</li>
+                            <li><strong>Canlı Döviz Çevirici:</strong> Türkiye Cumhuriyet Merkez Bankası (TCMB) günlük kurlarıyla entegre çalışarak Türk Lirası üzerinden güncel döviz hesaplamalarını anında gerçekleştirir.</li>
+                            <li><strong>Anlık Hava Durumu Sorgulama:</strong> Şehir adı veya doğrudan konum koordinatları üzerinden güncel hava durumu verilerini analiz edip kullanıcıya sunar.</li>
+                            <li><strong>İl ve İlçe Bazlı Namaz Vakitleri:</strong> Türkiye genelindeki tüm il ve ilçeler için günlük namaz vakitlerini hassas konum çözümleme desteğiyle listeler.</li>
+                            <li><strong>Kullanıcı Hesapları ve İşlem Geçmişi:</strong> JWT tabanlı güvenli kayıt ve giriş sistemi sayesinde her kullanıcı kendi yaptığı sorgulamaların geçmişini görüntüleyebilir ve dilediği zaman yönetebilir.</li>
+                            <li><strong>Gelişmiş Yönetici Paneli (Admin):</strong> Sistem yöneticileri kullanıcı hesaplarını kontrol edebilir, şifre yenileyebilir ve dış kaynaklardan gelen günlük kur veya veri kayıtlarına doğrudan müdahale ederek (override) ortak veri arşivini güncelleyebilir.</li>
+                        </ul>
+
+                        <h4>Teknik Altyapı ve Mimari Yapı</h4>
+                        <ul>
+                            <li><strong>Katmanlı ve Modüler Mimari:</strong> Proje, bakım kolaylığı ve yüksek performans amacıyla Onion (Soğan) Mimari prensiplerine uygun olarak Domain, Infrastructure ve Sunum (UI/API) katmanlarına ayrılmıştır. İş kuralları, veri erişimi ve dış servis entegrasyonları birbirinden bağımsız çalışır.</li>
+                            <li><strong>Akıllı Önbellekleme ve Veri Arşivleme:</strong> Dış API kaynaklarından çekilen veriler belirlenen süreler boyunca veritabanının önbellek şemasında saklanır. Bu sayede dış servislere gereksiz yük bindirilmez, sayfa yanıt süreleri hızlanır ve altın ile döviz verileri günlük olarak arşivlenir.</li>
+                            <li><strong>Bulut Tabanlı Veritabanı ve Dağıtım:</strong> Veriler PostgreSQL üzerinde şema bazlı (Auth, Activity, Cache) olarak ayrıştırılmış bir yapıda tutulur. Docker konteyner teknolojisiyle paketlenen uygulama bulut ortamında kesintisiz olarak yayınlanır.</li>
+                        </ul>
                     </div>
                 </details>
                 <div class="project-entry-actions">

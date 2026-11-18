@@ -46,28 +46,30 @@
                     <span class="project-entry-type">BACKEND / FULL-STACK</span>
                 </div>
                 <h2>IntegrationHub — Monolitik REST API</h2>
-                <p>C# ile geliştirilmiş, JWT ile oturum doğrulayan ve katmanlı mimariye sahip monolitik bir REST API. İsteği seçilen hizmete göre ilgili servise yönlendirir, sonuçları kullanıcıya döndürür ve başarılı işlemleri geçmişe kaydeder; kullanıcılar seçtikleri hizmet üzerinden sorgulama ve hesaplama yapabilir.</p>
-                <div class="tag-list"><span>C#</span><span>ASP.NET Core Web API</span><span>JWT</span><span>Entity Framework Core</span><span>SQL Server</span><span>Layered Architecture</span></div>
+                <p>Döviz kurları, altın fiyatları, hava durumu ve namaz vakitleri gibi farklı dış kaynaklardan gelen verileri tek bir merkezde toplayan monolitik bir web uygulaması. C# ile geliştirilmiş; JWT ile oturum doğrulama, çok katmanlı önbellekleme ve yedek kaynak mekanizması sunar.</p>
+                <div class="tag-list"><span>C#</span><span>.NET 8</span><span>ASP.NET Core Web API</span><span>JWT</span><span>BCrypt</span><span>Entity Framework Core</span><span>PostgreSQL</span><span>Docker</span><span>Layered Architecture</span></div>
                 <details class="project-details">
                     <summary>Detaylı açıklamayı gör <span aria-hidden="true">▾</span></summary>
                     <div class="project-details-body">
-                        <p>IntegrationHub, kullanıcıların günlük hayatta sıkça ihtiyaç duyduğu finansal ve anlık bilgilere tek bir merkezden hızlıca ulaşmasını sağlayan modern bir ASP.NET Core 8 web uygulamasıdır. Arayüz ve arka plan servislerinin tek bir çatı altında sunulduğu proje; temiz kod yapısı, güvenli kimlik doğrulama sistemi ve akıllı önbellekleme mekanizmasıyla uçtan uca eksiksiz bir deneyim sunar.</p>
+                        <p>IntegrationHub, farklı dış kaynaklardan (döviz kurları, altın fiyatları, hava durumu, namaz vakitleri ve ters coğrafi kodlama) alınan verileri tek bir merkezde toplayan, .NET 8 tabanlı bir web uygulamasıdır. Proje; çok katmanlı önbellekleme, yedek kaynak (fallback) mekanizması, yönetici veri yönetimi ve kullanıcı işlem geçmişi ile uçtan uca bir deneyim sunar.</p>
 
                         <h4>Uygulamanın Sunduğu Temel Özellikler</h4>
                         <ul>
-                            <li><strong>Kapsamlı Altın Hesaplama:</strong> Gram, çeyrek, yarım, tam, cumhuriyet, reşat, ata, gremse, has, 14/18/22 ayar, beşli, hamit, ikibuçuk ve ons olmak üzere 16 farklı altın türü için anlık olarak Türk Lirası ve adet/gram arası çift yönlü dönüşüm yapar.</li>
-                            <li><strong>Canlı Döviz Çevirici:</strong> Türkiye Cumhuriyet Merkez Bankası (TCMB) günlük kurlarıyla entegre çalışarak Türk Lirası üzerinden güncel döviz hesaplamalarını anında gerçekleştirir.</li>
-                            <li><strong>Anlık Hava Durumu Sorgulama:</strong> Şehir adı veya doğrudan konum koordinatları üzerinden güncel hava durumu verilerini analiz edip kullanıcıya sunar.</li>
-                            <li><strong>İl ve İlçe Bazlı Namaz Vakitleri:</strong> Türkiye genelindeki tüm il ve ilçeler için günlük namaz vakitlerini hassas konum çözümleme desteğiyle listeler.</li>
-                            <li><strong>Kullanıcı Hesapları ve İşlem Geçmişi:</strong> JWT tabanlı güvenli kayıt ve giriş sistemi sayesinde her kullanıcı kendi yaptığı sorgulamaların geçmişini görüntüleyebilir ve dilediği zaman yönetebilir.</li>
-                            <li><strong>Gelişmiş Yönetici Paneli (Admin):</strong> Sistem yöneticileri kullanıcı hesaplarını kontrol edebilir, şifre yenileyebilir ve dış kaynaklardan gelen günlük kur veya veri kayıtlarına doğrudan müdahale ederek (override) ortak veri arşivini güncelleyebilir.</li>
+                            <li><strong>Döviz:</strong> Türkiye Cumhuriyet Merkez Bankası (TCMB) üzerinden günlük kurları çeker ve TL karşılığı dönüşüm yapar.</li>
+                            <li><strong>Altın:</strong> Birincil kaynak olarak Truncgil Finans verilerini kullanır. Erişim sorunu yaşanırsa uluslararası ons altın fiyatı ve TCMB dolar kuru üzerinden otomatik hesaplama yapan yedek sisteme geçer.</li>
+                            <li><strong>Hava Durumu:</strong> Open-Meteo Geocoding ve Forecast servislerini kullanır; yanıt alınamazsa wttr.in yedek servisine geçer.</li>
+                            <li><strong>Namaz Vakitleri:</strong> Diyanet verileri üzerinden il ve ilçe bazında günlük vakitleri sunar.</li>
+                            <li><strong>Konum Çözümleme:</strong> Tarayıcı koordinatlarını OpenStreetMap Nominatim üzerinden il ve ilçe bilgisine dönüştürür.</li>
+                            <li><strong>Kullanıcı Hesapları ve İşlem Geçmişi:</strong> BCrypt ile şifreleme ve JWT tabanlı oturum yönetimi sayesinde her kullanıcı yaptığı hesaplamaları kişisel geçmişinde görüntüleyebilir; tekrarlı kayıt oluşturmayan (idempotent) yapı sayesinde geçmiş dilediği zaman temizlenebilir.</li>
+                            <li><strong>Yönetici Paneli ve Veri Ezme (Admin Override):</strong> Yöneticiler kullanıcı hesaplarını yönetebilir, şifre sıfırlayabilir ve ortak veri arşivindeki kayıtları ekleyip güncelleyebilir veya silebilir. Yönetici tarafından düzenlenen günlük kayıtlar dış API güncellemeleriyle ezilmez ve o günkü hesaplamalarda öncelikli kullanılır.</li>
                         </ul>
 
                         <h4>Teknik Altyapı ve Mimari Yapı</h4>
                         <ul>
-                            <li><strong>Katmanlı ve Modüler Mimari:</strong> Proje, bakım kolaylığı ve yüksek performans amacıyla Onion (Soğan) Mimari prensiplerine uygun olarak Domain, Infrastructure ve Sunum (UI/API) katmanlarına ayrılmıştır. İş kuralları, veri erişimi ve dış servis entegrasyonları birbirinden bağımsız çalışır.</li>
-                            <li><strong>Akıllı Önbellekleme ve Veri Arşivleme:</strong> Dış API kaynaklarından çekilen veriler belirlenen süreler boyunca veritabanının önbellek şemasında saklanır. Bu sayede dış servislere gereksiz yük bindirilmez, sayfa yanıt süreleri hızlanır ve altın ile döviz verileri günlük olarak arşivlenir.</li>
-                            <li><strong>Bulut Tabanlı Veritabanı ve Dağıtım:</strong> Veriler PostgreSQL üzerinde şema bazlı (Auth, Activity, Cache) olarak ayrıştırılmış bir yapıda tutulur. Docker konteyner teknolojisiyle paketlenen uygulama bulut ortamında kesintisiz olarak yayınlanır.</li>
+                            <li><strong>Katmanlı Mimari:</strong> Proje, sorumlulukların ayrılması ilkesine göre Domain, Infrastructure ve Web katmanlarına ayrılmıştır. Domain hiçbir katmana bağımlı değildir (EF Core/Npgsql paketi içermez); yalnızca entity, DTO, arayüz ve iş kurallarını barındırır. Infrastructure, dış dünya entegrasyonları ile EF Core, repository ve cache sorumluluğunu üstlenir.</li>
+                            <li><strong>Modüler Entegrasyon Mimarisi:</strong> <code>IIntegrationService</code> arayüzünü uygulayan tüm servisler reflection ile otomatik olarak sisteme kaydedilir ve dinamik form metadata'sı üretir.</li>
+                            <li><strong>Çok Katmanlı Önbellek ve Günlük Arşiv:</strong> Dış API çağrılarını azaltmak ve eşzamanlı isteklerde (cache stampede) dış servisleri korumak için <code>SemaphoreSlim</code> kilitli veritabanı önbelleği kullanılır. Çekilen günlük veriler otomatik olarak ortak veri arşivine (SharedApiData) kaydedilir.</li>
+                            <li><strong>PostgreSQL ve Dağıtım:</strong> Veriler PostgreSQL üzerinde şema bazlı (Auth, Activity, Cache) ayrıştırılmış bir yapıda tutulur. Docker konteyner teknolojisiyle paketlenen uygulama bulut ortamında yayınlanır; açılışta DatabaseInitializer migration'ları uygular ve yönetici yoksa ilk yönetici hesabını oluşturur.</li>
                         </ul>
                     </div>
                 </details>

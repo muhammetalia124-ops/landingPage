@@ -1355,23 +1355,11 @@ html.is-pinned .projects .section-heading h2 {
 
 @media (max-width: 620px) {
     :root {
-        --nav-h: 80px;
+        --nav-h: 52px;
     }
 
     html {
-        scroll-padding-top: 84px;
-    }
-
-    /* mobilde menü iki satır: içerik altından görünmesin diye her zaman dolu zemin */
-    .site-header {
-        border-bottom-color: var(--line);
-        background: color-mix(in srgb, var(--page) 90%, transparent);
-        -webkit-backdrop-filter: saturate(180%) blur(18px);
-        backdrop-filter: saturate(180%) blur(18px);
-    }
-
-    .nav-links > a {
-        padding-block: 6px;
+        scroll-padding-top: 110px;
     }
 
     .container {
@@ -1410,7 +1398,7 @@ html.is-pinned .projects .section-heading h2 {
     }
 
     html.is-scrolly .hero {
-        padding-block: calc(var(--nav-h) + 8px) 56px;
+        padding-top: 110px;
     }
 
     .hero .eyebrow {
@@ -1480,23 +1468,6 @@ html.is-pinned .projects .section-heading h2 {
 }
 
 @media (max-width: 620px) and (max-height: 720px) {
-    .hero-bottom {
-        display: none;
-    }
-
-    html.is-scrolly .hero {
-        padding-block: calc(var(--nav-h) + 4px) 16px;
-    }
-
-    .hero .eyebrow {
-        font-size: 8px;
-    }
-
-    .hero-meta {
-        gap: 6px 18px;
-        font-size: 10px;
-    }
-
     .hero h1 {
         margin: 18px 0 14px;
         font-size: clamp(42px, 12.5vw, 58px);

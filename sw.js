@@ -1,5 +1,5 @@
-const C = 'ma-v4';
-const A = ['/', '/index.html', '/projeler.html', '/style.css', '/script.js', '/icon-192.png', '/icon-512.png', '/manifest.json'];
+const C = 'ma-v5';
+const A = ['/', '/index.html', '/projeler.html', '/mobil.html', '/mobil-projeler.html', '/mobil.css', '/mobil.js', '/style.css', '/script.js', '/icon-192.png', '/icon-512.png', '/manifest.json'];
 
 self.addEventListener('install', e => {
     self.skipWaiting();

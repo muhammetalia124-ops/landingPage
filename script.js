@@ -256,12 +256,8 @@ async function initScene() {
     }
 
     /* --- boyut --- */
-    let lastW = 0, lastH = 0;
     function resize() {
         const w = window.innerWidth, h = window.innerHeight;
-        // mobil adres çubuğu kaydırırken yüksekliği oynatır: küçük değişimlerde yeniden boyutlandırma
-        if (lastW && w === lastW && Math.abs(h - lastH) < 140) return;
-        lastW = w; lastH = h;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         const a = w / h;
@@ -490,10 +486,10 @@ function buildHome(gsap, desktop) {
     /* --- 3D sahne anahtar kareleri (bölüm girişinde geçiş) --- */
     const KF = {
         top: { morph: 0, x: 0, y: 0, s: 1, tilt: 0, roll: 0, op: 1, ring: 1 },
-        hakkimda: { morph: 1, x: 0, y: 0, s: 1.05, tilt: 0.2, roll: 0, op: 0.55, ring: 0.5 },
-        projeler: { morph: 2, x: 0, y: 0, s: 1.15, tilt: -0.15, roll: 0, op: 0.3, ring: 0.2 },
-        teknolojiler: { morph: 3, x: 0, y: 0, s: 1.05, tilt: 0, roll: 0, op: 0.5, ring: 0.3 },
-        iletisim: { morph: 4, x: 0, y: -0.1, s: 1.1, tilt: 0.5, roll: -0.2, op: 0.9, ring: 1 },
+        hakkimda: { morph: 0, x: 0, y: 0, s: 1.05, tilt: 0.2, roll: 0, op: 0.55, ring: 0.5 },
+        projeler: { morph: 0, x: 0, y: 0, s: 1.15, tilt: -0.15, roll: 0, op: 0.3, ring: 0.2 },
+        teknolojiler: { morph: 0, x: 0, y: 0, s: 1.05, tilt: 0, roll: 0, op: 0.5, ring: 0.3 },
+        iletisim: { morph: 0, x: 0, y: -0.1, s: 1.1, tilt: 0.5, roll: -0.2, op: 0.9, ring: 1 },
     };
     const ids = Object.keys(KF);
     Object.assign(fx, KF.top, { zoom: 0, rot: 0 });
@@ -685,8 +681,7 @@ function buildHome(gsap, desktop) {
 /* ===== Projeler sayfası sahneleri ===== */
 function buildProjects(gsap) {
     const ScrollTrigger = window.ScrollTrigger;
-    Object.assign(fx, { morph: 1, x: 0, y: 0, s: 1.1, tilt: 0.1, roll: 0, op: 0.5, ring: 0.5, zoom: 0, rot: 0 });
-    gsap.to(fx, { morph: 3, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 1 } });
+    Object.assign(fx, { morph: 0, x: 0, y: 0, s: 1.1, tilt: 0.1, roll: 0, op: 0.5, ring: 0.5, zoom: 0, rot: 0 });
     gsap.to(fx, { rot: Math.PI * 1.6, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 1 } });
 
     /* --- açılış --- */

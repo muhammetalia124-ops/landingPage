@@ -256,8 +256,12 @@ async function initScene() {
     }
 
     /* --- boyut --- */
+    let lastW = 0, lastH = 0;
     function resize() {
         const w = window.innerWidth, h = window.innerHeight;
+        // mobil adres çubuğu kaydırırken yüksekliği oynatır: küçük değişimlerde yeniden boyutlandırma
+        if (lastW && w === lastW && Math.abs(h - lastH) < 140) return;
+        lastW = w; lastH = h;
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         const a = w / h;

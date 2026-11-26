@@ -2,8 +2,8 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b1020">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#070b16">
     <meta name="description" content="Muhammet Ali'nin yazılım projeleri ve kullandığı teknolojiler.">
     <title>Projeler — Muhammet Ali</title>
     <!-- Tarayıcı Sekme İkonu (Favicon) -->
@@ -11,12 +11,34 @@
     <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
     <link rel="apple-touch-icon" href="./icon-192.png">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-<link rel="manifest" href="./manifest.json"><link rel="icon" type="image/svg+xml" href="./icon.svg"><meta name="theme-color" content="#0b1020"><script>if("serviceWorker"in navigator){navigator.serviceWorker.register("./sw.js");}</script></head>
-<body>
+
+    <script>
+        document.documentElement.classList.add("js");
+        setTimeout(function () { document.documentElement.classList.add("ready"); }, 2500);
+    </script>
+    <noscript><style>html.js:not(.ready) body { opacity: 1 !important; }</style></noscript>
+
+    <script type="importmap">
+        { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <script type="module" src="script.js"></script>
+    <link rel="manifest" href="./manifest.json">
+    <script>if("serviceWorker"in navigator){navigator.serviceWorker.register("./sw.js");}</script>
+</head>
+<body data-page="projects">
     <a class="skip-link" href="#main">İçeriğe geç</a>
-    <header class="projects-header" id="top">
+
+    <div class="progress" aria-hidden="true"><i></i></div>
+    <canvas id="scene" aria-hidden="true"></canvas>
+
+    <header class="site-header">
         <nav class="site-nav container" aria-label="Ana gezinme">
             <a class="brand" href="index.html" aria-label="Muhammet Ali ana sayfa">
                 <span class="brand-mark">MA</span>
@@ -27,18 +49,21 @@
                 <a href="#main" aria-current="page">Projeler</a>
                 <a href="index.html#teknolojiler">Teknolojiler</a>
                 <a href="index.html#iletisim">İletişim</a>
-                <label class="theme-control" for="theme-switch">
-                    <span aria-hidden="true">☾</span>
-                    <input type="checkbox" id="theme-switch" role="switch" aria-label="Açık temayı etkinleştir">
-                    <span class="theme-track" aria-hidden="true"></span>
-                    <span aria-hidden="true">☀</span>
-                </label>
             </div>
+            <label class="theme-control" for="theme-switch">
+                <span aria-hidden="true">☾</span>
+                <input type="checkbox" id="theme-switch" role="switch" aria-label="Açık temayı etkinleştir">
+                <span class="theme-track" aria-hidden="true"></span>
+                <span aria-hidden="true">☀</span>
+            </label>
         </nav>
+    </header>
+
+    <header class="projects-header" id="top">
         <div class="projects-hero container">
             <p class="eyebrow"><span class="status-dot"></span> DENEME, ÖĞRENME, GELİŞTİRME</p>
-            <h1>Üzerinde çalıştığım<br><span>projeler.</span></h1>
-            <p>Her proje yeni bir şey öğrenmek ve öğrendiklerimi çalışan bir ürüne dönüştürmek için bir fırsat.</p>
+            <h1>Üzerinde çalıştığım<br><span class="accent">projeler.</span></h1>
+            <p class="projects-lead">Her proje yeni bir şey öğrenmek ve öğrendiklerimi çalışan bir ürüne dönüştürmek için bir fırsat.</p>
         </div>
     </header>
 

@@ -35,9 +35,9 @@ $('nav').innerHTML=P.map((p,i)=>`<button data-go="${i}">${p.t}</button>`).join('
 if(!window.THREE||!window.gsap){document.body.className='nogl';$('pc').innerHTML=PG.join('<hr>');return}
 const cv=$('c');let R;
 try{R=new THREE.WebGLRenderer({canvas:cv,powerPreference:'high-performance'})}catch(e){document.body.className='nogl';$('pc').innerHTML=PG.join('<hr>');return}
-const dpr=window.devicePixelRatio||1,maxPr=()=>MOB?Math.min(dpr,2):Math.min(Math.max(dpr,2),Math.sqrt(8.3e6/(cv.clientWidth*cv.clientHeight)));
+const maxPr=()=>{const d=window.devicePixelRatio||1;return MOB?Math.min(d,2):Math.min(Math.max(d,2),Math.sqrt(8.3e6/(cv.clientWidth*cv.clientHeight)))};
 let pr=maxPr(),asp=1;
-const rs=()=>{pr=Math.min(pr,maxPr());R.setPixelRatio(pr);R.setSize(cv.clientWidth,cv.clientHeight,false);asp=cv.clientWidth/cv.clientHeight};rs();
+const rs=()=>{if(!cv.clientWidth||!cv.clientHeight)return;pr=Math.min(pr,maxPr());R.setPixelRatio(pr);R.setSize(cv.clientWidth,cv.clientHeight,false);asp=cv.clientWidth/cv.clientHeight};rs();
 let lw=innerWidth;addEventListener('resize',()=>{if(innerWidth!==lw){lw=innerWidth;rs()}});
 
 /* ---------- Karadelik: tam ekran ray-march (Schwarzschild ışın bükülmesi) ---------- */
@@ -151,7 +151,7 @@ gsap.to('#hero',{opacity:0,y:-40,ease:'none',scrollTrigger:{trigger:'#sp',start:
 
 /* ---------- Durum, tıklama, sayfalar ---------- */
 const cap=$('cap'),railI=document.querySelector('#rail i'),end=$('end'),pg=$('pg'),pc=$('pc'),fl=$('fl'),vg=$('vg'),sw=$('sw');
-let tx=0,ty=0,px=0,py=0,K=0,clk=-1,clkT=0,po=0,ex=0,cur=0,Dp=0,T=0,last=performance.now(),acc=0,fc=0,cs='',hov=-1;
+let tx=0,ty=0,px=0,py=0,K=0,clk=-1,clkT=0,po=0,ex=0,cur=0,Dp=0,T=0,last=performance.now(),acc=0,fc=0,cs='',hov=-1,wu=0,slow=0;
 const rc=new THREE.Raycaster(),mv=new THREE.Vector2(9,9);let dn=null;
 const setM=e=>{const r=cv.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1)};
 const pick=()=>{rc.setFromCamera(mv,cam);return rc.intersectObjects(PM.filter(m=>m.visible&&m.userData.cap<.01))[0]};
@@ -161,7 +161,7 @@ function go(i){clk=i;clkT=cur;gsap.killTweensOf(KK);
 gsap.to(KK,{v:1,duration:4.2,ease:'power2.in',onUpdate(){K=KK.v;if(K>.93&&!po){po=1;show(i)}}})}
 function reset(){gsap.killTweensOf(KK);scrollTo(0,0);S.t=0;cur=0;K=0;KK.v=0;Dp=0;clk=-1;ex=0;end.style.opacity=0;end.style.pointerEvents='none';gsap.set('#hero',{opacity:1,y:0})}
 function shut(){if(!po)return;po=0;pg.className='';gsap.killTweensOf([KK,'#hero div']);scrollTo(0,0);S.t=0;cur=0;clkT=0;ex=1;gsap.set('#hero div',{opacity:0});
-gsap.to(KK,{v:0,duration:2.8,delay:.45,ease:'power3.out',onUpdate(){K=KK.v},onComplete(){clk=-1;ex=0}});
+gsap.to(KK,{v:0,duration:2.8,delay:.45,ease:'power3.out',onUpdate(){K=KK.v},onComplete(){clk=-1;ex=0;resume()}});
 gsap.fromTo('#hero div',{opacity:0,y:30,scale:.96},{opacity:1,y:0,scale:1,duration:1.4,delay:1.5,ease:'power2.out'})}
 addEventListener('pointermove',e=>{setM(e);tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5});
 addEventListener('pointerdown',e=>{setM(e);dn=[e.clientX,e.clientY]});
@@ -169,6 +169,13 @@ addEventListener('pointerup',e=>{if(dn&&e.target===cv&&canClick()&&Math.hypot(e.
 addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-go]');if(!b)return;const g=b.dataset.go;if(g==='h')shut();else if(po)show(+g);else if(canClick())go(+g)});
 addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
 $('up').onclick=reset;$('bk').onclick=shut;
+
+/* ---------- bfcache / sekme dönüşü: ölçümü sıfırla, boyutu ve dokuları yenile ---------- */
+const resume=full=>{last=performance.now();acc=fc=slow=0;wu=T+2.5;
+if(full){lw=innerWidth;pr=maxPr();rs();PM.forEach((m,i)=>{const u=m.material.uniforms,o=u.map.value;u.map.value=tex(P[i]);o.dispose()})}};
+addEventListener('pageshow',e=>{if(e.persisted)resume(1)});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)resume()});
+cv.addEventListener('webglcontextrestored',()=>resume(1));
 
 /* ---------- Döngü ---------- */
 function loop(now){
@@ -194,7 +201,7 @@ if(c2!==cs){cap.textContent=c2;cs=c2}
 railI.style.transform=`scaleY(${cl(cur)})`;vg.style.opacity=cl(D*1.4-.15);
 const eo=clk>=0?0:cl((cur-.93)/.05);end.style.opacity=eo;end.style.pointerEvents=eo>.5?'auto':'none';
 if(!po){if(Rn<1)R.clear();else R.render(sc,cam)}
-if(!po&&T>2.5){if(raw>.25){acc=0;fc=0}else{acc+=raw;fc++}if(fc>=30){const av=acc/fc;acc=0;fc=0;if(av>.022&&pr>.6){pr=Math.max(.6,pr*Math.sqrt(.0185/av));rs()}}}
+if(!po&&clk<0&&!ex&&T>2.5){if(T<wu||raw>.25){acc=0;fc=0;slow=0}else{acc+=raw;fc++}if(fc>=30){const av=acc/fc;acc=0;fc=0;if(av>.022&&pr>.6){if(++slow>=(av>.05?1:2)){slow=0;pr=Math.max(.6,pr*Math.sqrt(.0185/av));rs()}}else slow=0}}
 requestAnimationFrame(loop)}
 Promise.race([document.fonts?document.fonts.load('600 40px "Space Grotesk"'):0,new Promise(r=>setTimeout(r,1500))]).catch(()=>{}).then(()=>{build();requestAnimationFrame(loop)});
 })();

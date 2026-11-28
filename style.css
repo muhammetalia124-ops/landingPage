@@ -43,7 +43,6 @@ hr{border:0;border-top:1px solid #ffffff22;margin:40px 0}
 .nogl #c,.nogl #sp,.nogl #hero,.nogl #end,.nogl #rail,.nogl #bk,.nogl [data-go]{display:none}
 .nogl #pg{position:static;opacity:1;visibility:visible}
 
-/* sayfa kimliği: her sayfa kendi panel rengini kullanır */
 #pg{--pa:#ffb347;--pb:#ffb34722;--pc:#ffb34755}
 .ph{position:relative;display:flex;align-items:center;gap:14px;margin:4px 0 30px;padding-bottom:18px;border-bottom:1px solid #ffffff1a}
 .ph::after{content:"";position:absolute;left:0;bottom:-1px;width:140px;height:2px;background:linear-gradient(90deg,var(--pa),transparent)}
@@ -62,4 +61,3 @@ hr{border:0;border-top:1px solid #ffffff22;margin:40px 0}
 #pg .row:not(.ft)>.b:first-child:not(:only-child){background:var(--pa);border-color:var(--pa);color:#070a14}
 #pg .row:not(.ft)>.b:first-child:not(:only-child):hover{color:#070a14;filter:brightness(1.1)}
 .ft{margin-bottom:14px}
-.ft-c{margin:0;text-align:center;font:12px ui-monospace,Menlo,monospace;color:var(--mut)}

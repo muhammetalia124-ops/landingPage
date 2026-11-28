@@ -1,12 +1,11 @@
-/* Çevrimdışı çalışma: service worker kaydı */
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 
 (()=>{
 const MOB=matchMedia('(pointer:coarse)').matches||innerWidth<700;
 const P=[
-{k:'HAKKIMDA',t:'CV & Profil',s:'Eğitim · Deneyim · Teknolojiler',c:'#ffb347',ic:0,ch:['C#','ASP.NET Core','SQL Server'],cta:'Profili görüntüle'},
-{k:'CANLI DEMO',t:'Çalışan Projeler',s:'Canlı demolar ve proje detayları',c:'#7dd3fc',ic:1,live:1,ch:['Integration Hub','REST API','JWT'],cta:'Projeleri incele'},
-{k:'AÇIK KAYNAK',t:'GitHub',s:'Kaynak kodları ve depolar',c:'#86efac',ic:2,ch:['2 proje','Açık kaynak','muhammetalia124-ops'],cta:'Depoları görüntüle'}];
+{k:'HAKKIMDA',t:'CV & Profil',s:'Eğitim · Deneyim · Teknolojiler',c:'#ffb347',ic:0,cta:'Profili görüntüle'},
+{k:'CANLI DEMO',t:'Çalışan Projeler',s:'Canlı demolar ve proje detayları',c:'#7dd3fc',ic:1,live:1,cta:'Projeleri incele'},
+{k:'AÇIK KAYNAK',t:'GitHub',s:'Kaynak kodları ve depolar',c:'#86efac',ic:2,cta:'Depoları görüntüle'}];
 const $=id=>document.getElementById(id);
 const M='https://mail.google.com/mail/?view=cm&fs=1&to=aydemirmuhammetali5@gmail.com',GH='https://github.com/muhammetalia124-ops',HUB='https://integrationhub-y0m3.onrender.com';
 const A_=(h,t)=>`<a class="b" href="${h.replace(/&/g,'&amp;')}" target="_blank" rel="noopener">${t}</a>`;
@@ -44,7 +43,6 @@ let pr=maxPr(),asp=1;
 const rs=()=>{if(!cv.clientWidth||!cv.clientHeight)return;pr=Math.min(pr,maxPr());R.setPixelRatio(pr);R.setSize(cv.clientWidth,cv.clientHeight,false);asp=cv.clientWidth/cv.clientHeight};rs();
 let lw=innerWidth;addEventListener('resize',()=>{if(innerWidth!==lw){lw=innerWidth;rs()}});
 
-/* ---------- Karadelik: tam ekran ray-march (Schwarzschild ışın bükülmesi) ---------- */
 const VS='varying vec2 vUv;void main(){vUv=position.xy;gl_Position=vec4(position.xy,0.,1.);}';
 const FS=`varying vec2 vUv;uniform vec3 uCam;uniform mat3 uRot;uniform float uT,uAsp,uTan;
 float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
@@ -111,7 +109,6 @@ const bhM=new THREE.ShaderMaterial({uniforms:{uCam:{value:new THREE.Vector3()},u
 const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,400);
 const bh=new THREE.Mesh(new THREE.PlaneGeometry(2,2),bhM);bh.frustumCulled=false;bh.renderOrder=-1;sc.add(bh);
 
-/* ---------- 3D link panelleri ---------- */
 const PV=`uniform float uCap;varying vec2 vUv;varying vec3 vW;varying float vS;
 void main(){vUv=uv;vec3 w=(modelMatrix*vec4(position,1.)).xyz;vS=0.;
 if(uCap>0.){float rho=length(w.xz),g=(17.-rho)/17.,s=clamp(uCap+g*9.*uCap*(1.-uCap),0.,1.);vS=s;
@@ -146,14 +143,12 @@ g.restore();
 if(p.live){g.beginPath();g.arc(106,46,7,0,7);g.lineWidth=4;g.strokeStyle='#0a0e1c';g.stroke();g.fillStyle='#4ade80';g.fill()}
 g.fillStyle=p.c;g.font='600 21px '+FN;ls('3px');g.fillText(p.k,128,80);
 g.textAlign='right';g.fillStyle='#9a9488';g.fillText('0'+(I+1)+' / 0'+P.length,720,80);g.textAlign='left';ls('0px');
-g.fillStyle='#f4efe6';g.font='600 58px '+FN;g.fillText(p.t,48,204);
+g.fillStyle='#f4efe6';g.font='600 58px '+FN;g.fillText(p.t,48,202);
 g.fillStyle='#9a9488';g.font='400 24px '+FN;g.fillText(p.s,48,250);
-g.fillStyle='#ffffff1f';g.fillRect(48,276,672,1.5);
-g.font='600 18px '+FN;let x=48;
-for(const s of p.ch){const w=g.measureText(s).width+28;if(x+w>720)break;rr(g,x,296,w,36,18);g.fillStyle='#ffffff0d';g.fill();g.lineWidth=1.5;g.strokeStyle=p.c+'55';g.stroke();g.fillStyle='#d8d2c4';g.fillText(s,x+14,320);x+=w+10}
-g.fillStyle=p.c;g.font='600 24px '+FN;g.fillText(p.cta,48,385);
-g.beginPath();g.arc(694,376,28,0,7);g.fillStyle=p.c;g.fill();
-g.save();g.translate(694,376);g.strokeStyle='#070a14';g.lineWidth=3.6;g.lineCap=g.lineJoin='round';g.beginPath();g.moveTo(-8,8);g.lineTo(8,-8);g.moveTo(-3,-8);g.lineTo(8,-8);g.lineTo(8,3);g.stroke();g.restore();
+g.fillStyle='#ffffff1f';g.fillRect(48,300,672,1.5);
+g.fillStyle=p.c;g.font='600 24px '+FN;g.fillText(p.cta,48,373);
+g.beginPath();g.arc(694,364,28,0,7);g.fillStyle=p.c;g.fill();
+g.save();g.translate(694,364);g.strokeStyle='#070a14';g.lineWidth=3.6;g.lineCap=g.lineJoin='round';g.beginPath();g.moveTo(-8,8);g.lineTo(8,-8);g.moveTo(-3,-8);g.lineTo(8,-8);g.lineTo(8,3);g.stroke();g.restore();
 const t=new THREE.CanvasTexture(c);t.anisotropy=Math.min(8,R.capabilities.getMaxAnisotropy());return t}
 const A=P.map((_,i)=>.4+i*1.25),Y=[1.6,-1.4,1.8];
 const BP=A.map((a,i)=>new THREE.Vector3(17*Math.cos(a),Y[i],17*Math.sin(a)));
@@ -161,7 +156,6 @@ const PM=[];
 const build=()=>P.forEach((p,i)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(6.4,3.6,72,40),new THREE.ShaderMaterial({uniforms:{map:{value:tex(p)},uA:{value:1},uH:{value:0},uCap:{value:0}},vertexShader:PV,fragmentShader:PF,transparent:true,depthWrite:false,side:THREE.DoubleSide}));
 m.userData={i,cap:0,fz:0,p:new THREE.Vector3(),q:new THREE.Quaternion()};m.position.copy(BP[i]);sc.add(m);PM.push(m)});
 
-/* ---------- Kamera yolu ---------- */
 const cl=(x,a=0,b=1)=>Math.min(Math.max(x,a),b),E=x=>x*x*(3-2*x),N=P.length;
 const S={t:0},B={g:new THREE.Vector3(),R:30,a:0,y:5,idx:0,dw:1},tmp=new THREE.Vector3(),KK={v:0};
 function base(t){
@@ -173,7 +167,6 @@ gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true
 ScrollTrigger.create({trigger:'#sp',start:'top top',end:'bottom bottom',onUpdate:s=>{S.t=s.progress},onRefresh:s=>{S.t=s.progress}});
 gsap.to('#hero',{opacity:0,y:-40,ease:'none',scrollTrigger:{trigger:'#sp',start:'top top',end:'+=70%',scrub:true}});
 
-/* ---------- Durum, tıklama, sayfalar ---------- */
 const cap=$('cap'),railI=document.querySelector('#rail i'),end=$('end'),pg=$('pg'),pc=$('pc'),fl=$('fl'),vg=$('vg'),sw=$('sw');
 let tx=0,ty=0,px=0,py=0,K=0,clk=-1,clkT=0,po=0,ex=0,cur=0,Dp=0,T=0,last=performance.now(),acc=0,fc=0,cs='',hov=-1,wu=0,slow=0;
 const rc=new THREE.Raycaster(),mv=new THREE.Vector2(9,9);let dn=null;
@@ -182,7 +175,7 @@ const pick=()=>{rc.setFromCamera(mv,cam);return rc.intersectObjects(PM.filter(m=
 const canClick=()=>clk<0&&!po&&cl((cur-.66)/.26)<.05;
 function show(i){const c=P[i].c,n=(i+1)%N,v=(i+N-1)%N;
 pg.style.setProperty('--pa',c);pg.style.setProperty('--pb',c+'22');pg.style.setProperty('--pc',c+'55');
-pc.innerHTML=`<div class="ph"><span class="pi">${IC(i)}</span><span class="pk">${P[i].k}</span><span class="pn">0${i+1} / 0${N}</span></div>${PG[i]}<hr><div class="row ft">${GO(v,'← '+P[v].t)}${GO(n,P[n].t+' →')}</div><p class="ft-c">© 2026 Muhammet Ali</p>`;
+pc.innerHTML=`<div class="ph"><span class="pi">${IC(i)}</span><span class="pk">${P[i].k}</span><span class="pn">0${i+1} / 0${N}</span></div>${PG[i]}<hr><div class="row ft">${GO(v,'← '+P[v].t)}${GO(n,P[n].t+' →')}</div>`;
 pg.scrollTop=0;pg.className='on'}
 function go(i){clk=i;clkT=cur;gsap.killTweensOf(KK);
 gsap.to(KK,{v:1,duration:4.2,ease:'power2.in',onUpdate(){K=KK.v;if(K>.93&&!po){po=1;show(i)}}})}
@@ -197,14 +190,12 @@ addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-g
 addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
 $('up').onclick=reset;$('bk').onclick=shut;
 
-/* ---------- bfcache / sekme dönüşü: ölçümü sıfırla, boyutu ve dokuları yenile ---------- */
 const resume=full=>{last=performance.now();acc=fc=slow=0;wu=T+2.5;
 if(full){lw=innerWidth;pr=maxPr();rs();PM.forEach((m,i)=>{const u=m.material.uniforms,o=u.map.value;u.map.value=tex(P[i]);o.dispose()})}};
 addEventListener('pageshow',e=>{if(e.persisted)resume(1)});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)resume()});
 cv.addEventListener('webglcontextrestored',()=>resume(1));
 
-/* ---------- Döngü ---------- */
 function loop(now){
 const raw=(now-last)/1e3,dt=Math.min(raw,.1);last=now;T+=dt;
 cur+=(S.t-cur)*(1-Math.exp(-dt*5));

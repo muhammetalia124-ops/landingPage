@@ -1,4 +1,4 @@
-const V='portfolyo-v2';
+const V='portfolyo-v3';
 const APP=['./','index.html','style.css','script.js','manifest.json','icon.svg','icon-192.png','icon-512.png'];
 const LIB=['https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js','https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js','https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js'];
 const EXT=/^(cdnjs\.cloudflare\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)$/;

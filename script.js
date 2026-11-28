@@ -4,9 +4,9 @@ if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWor
 (()=>{
 const MOB=matchMedia('(pointer:coarse)').matches||innerWidth<700;
 const P=[
-{k:'HAKKIMDA',t:'CV & Profil',s:'Eğitim · Deneyim · Teknolojiler',c:'#ffb347'},
-{k:'CANLI DEMO',t:'Çalışan Projeler',s:'Canlı demolar ve proje detayları',c:'#7dd3fc'},
-{k:'AÇIK KAYNAK',t:'GitHub',s:'Kaynak kodları ve depolar',c:'#86efac'}];
+{k:'HAKKIMDA',t:'CV & Profil',s:'Eğitim · Deneyim · Teknolojiler',c:'#ffb347',ic:0,ch:['C#','ASP.NET Core','SQL Server'],cta:'Profili görüntüle'},
+{k:'CANLI DEMO',t:'Çalışan Projeler',s:'Canlı demolar ve proje detayları',c:'#7dd3fc',ic:1,live:1,ch:['Integration Hub','REST API','JWT'],cta:'Projeleri incele'},
+{k:'AÇIK KAYNAK',t:'GitHub',s:'Kaynak kodları ve depolar',c:'#86efac',ic:2,ch:['2 proje','Açık kaynak','muhammetalia124-ops'],cta:'Depoları görüntüle'}];
 const $=id=>document.getElementById(id);
 const M='https://mail.google.com/mail/?view=cm&fs=1&to=aydemirmuhammetali5@gmail.com',GH='https://github.com/muhammetalia124-ops',HUB='https://integrationhub-y0m3.onrender.com';
 const A_=(h,t)=>`<a class="b" href="${h.replace(/&/g,'&amp;')}" target="_blank" rel="noopener">${t}</a>`;
@@ -20,9 +20,12 @@ const PG=[
 <small class="ey">KISACA BEN</small><h2>Merakla başlar,<br>üreterek devam eder.</h2><p>Yazılım dünyasında sağlam temeller atıyor; öğrendiklerimi gerçek projelerle pekiştiriyorum.</p>
 <div class="g">${cd('01 / EĞİTİM','Bilgisayar Programcılığı','Pamukkale Üniversitesi<br>Çivril Atasay Kamer Meslek Yüksekokulu')}${cd('02 / DENEYİM','Gerçek dünyada öğrenme','Efor.ai’de staj yapıyor, yazılım geliştirme süreçlerinde deneyim kazanıyor.')}${cd('03 / DENGE','Üret, hareket et, tekrarla','Yazılım geliştirmenin yanında calisthenics ile disiplinimi ve odağımı besliyorum.')}</div>
 <small class="ey">ARAÇ KUTUM</small><h2>Her gün biraz<br>daha fazlası.</h2><p>Projelerimde kullandığım ve geliştirmeye devam ettiğim teknolojiler.</p>
-<div class="g">${gp('01','Frontend',['HTML','CSS','JavaScript'])}${gp('02','Backend',['C#','ASP.NET Core','JWT','Entity Framework Core'])}${gp('03','Veri &amp; araçlar',['SQL Server','SQL','REST','Layered Architecture'])}</div>`,
+<div class="g">${gp('01','Frontend',['HTML','CSS','JavaScript'])}${gp('02','Backend',['C#','ASP.NET Core','JWT','Entity Framework Core'])}${gp('03','Veri &amp; araçlar',['SQL Server','SQL','REST','Layered Architecture'])}</div>
+<div class="row">${A_(M,'E-posta ↗')}${A_(GH,'GitHub ↗')}${GO('h','← Ana sayfaya dön')}</div>`,
 `<small class="ey">SEÇİLİ İŞLER</small><h2>Fikirden<br>uygulamaya.</h2>
 <div class="cd"><small>BACKEND · WEB API</small><h3>Integration Hub</h3><p class="ld">Monolitik REST API</p><p>${tg(['C#','ASP.NET Core Web API','JWT','SQL Server','Entity Framework Core','Layered Architecture'])}</p><div class="row" style="justify-content:flex-start">${A_(HUB,'Canlı demoyu aç ↗')}${GO(2,'Proje detayları →')}</div></div>
+<small class="ey">ÖNE ÇIKANLAR</small><h2>Integration Hub<br>kısaca.</h2>
+<div class="g">${cd('01 / VERİ','Tek merkezde toplanır','Döviz kurları, altın fiyatları, hava durumu ve namaz vakitleri farklı dış kaynaklardan alınıp tek yerde sunulur.')}${cd('02 / GÜVENLİK','Oturum ve yetkilendirme','BCrypt ile şifreleme, JWT tabanlı oturum yönetimi ve yönetici paneli.')}${cd('03 / MİMARİ','Dayanıklı ve katmanlı','Çok katmanlı önbellek, yedek kaynak mekanizması ve Docker ile paketlenmiş dağıtım.')}</div>
 <div class="row">${GO('h','← Ana sayfaya dön')}</div>`,
 `<small class="ey">DENEME, ÖĞRENME, GELİŞTİRME</small><h2>Üzerinde çalıştığım<br>projeler.</h2><p>Her proje yeni bir şey öğrenmek ve öğrendiklerimi çalışan bir ürüne dönüştürmek için bir fırsat.</p><p class="m">02 PROJE · KAYNAK KODLARI AÇIK</p>
 <div class="cd"><small>01 · BACKEND / FULL-STACK</small><h3>IntegrationHub — Monolitik REST API</h3><p>Döviz kurları, altın fiyatları, hava durumu ve namaz vakitleri gibi farklı dış kaynaklardan gelen verileri tek bir merkezde toplayan monolitik bir web uygulaması. C# ile geliştirilmiş; JWT ile oturum doğrulama, çok katmanlı önbellekleme ve yedek kaynak mekanizması sunar.</p><p>${tg(['C#','.NET 8','ASP.NET Core Web API','JWT','BCrypt','Entity Framework Core','PostgreSQL','Docker','Layered Architecture'])}</p>
@@ -31,7 +34,7 @@ const PG=[
 <h3>Teknik Altyapı ve Mimari Yapı</h3><ul>${li('Katmanlı Mimari','Proje, sorumlulukların ayrılması ilkesine göre Domain, Infrastructure ve Web katmanlarına ayrılmıştır. Domain hiçbir katmana bağımlı değildir (EF Core/Npgsql paketi içermez); yalnızca entity, DTO, arayüz ve iş kurallarını barındırır. Infrastructure, dış dünya entegrasyonları ile EF Core, repository ve cache sorumluluğunu üstlenir.')}${li('Modüler Entegrasyon Mimarisi','<code>IIntegrationService</code> arayüzünü uygulayan tüm servisler reflection ile otomatik olarak sisteme kaydedilir ve dinamik form metadata’sı üretir.')}${li('Çok Katmanlı Önbellek ve Günlük Arşiv','Dış API çağrılarını azaltmak ve eşzamanlı isteklerde (cache stampede) dış servisleri korumak için <code>SemaphoreSlim</code> kilitli veritabanı önbelleği kullanılır. Çekilen günlük veriler otomatik olarak ortak veri arşivine (SharedApiData) kaydedilir.')}${li('PostgreSQL ve Dağıtım','Veriler PostgreSQL üzerinde şema bazlı (Auth, Activity, Cache) ayrıştırılmış bir yapıda tutulur. Docker konteyner teknolojisiyle paketlenen uygulama bulut ortamında yayınlanır; açılışta DatabaseInitializer migration’ları uygular ve yönetici yoksa ilk yönetici hesabını oluşturur.')}</ul></details>
 <div class="row" style="justify-content:flex-start">${A_(HUB,'Canlı demoyu aç ↗')}${A_(GH+'/integrationHub','Kaynak kodu ↗')}</div></div>
 <div class="cd"><small>02 · FRONTEND / WEB</small><h3>Kişisel Portföy Sitesi</h3><p>Kişisel bilgilerimi, kullandığım teknolojileri ve projelerimi tanıtan; farklı ekran boyutlarına uyum sağlayan kişisel web sitesi.</p><p>${tg(['HTML','CSS','JavaScript','Responsive tasarım'])}</p><div class="row" style="justify-content:flex-start">${A_(GH+'/landingPage','Kaynak kodu ↗')}</div></div>
-<div class="row">${GO('h','← Ana sayfaya dön')}</div>`];
+<div class="row">${A_(GH,'GitHub profilimi aç ↗')}${GO('h','← Ana sayfaya dön')}</div>`];
 $('nav').innerHTML=P.map((p,i)=>`<button data-go="${i}">${p.t}</button>`).join('')+A_(HUB,'Integration Hub canlı demo')+A_(GH,'GitHub')+A_(M,'E-posta');
 if(!window.THREE||!window.gsap){document.body.className='nogl';$('pc').innerHTML=PG.join('<hr>');return}
 const cv=$('c');let R;
@@ -123,14 +126,34 @@ vec3 c=t.rgb*(1.+.35*uH)*(1.+1.2*vS)+vec3(1.,.5,.15)*vS*vS*t.a*1.6;
 gl_FragColor=vec4(c,t.a*uA*occ*(1.-smoothstep(.8,1.,vS)));}`;
 const FN='"Space Grotesk",system-ui,sans-serif';
 function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
+const GHP='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z';
+const IC=i=>['<svg viewBox="-16 -16 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cy="-6" r="5.5"/><path d="M-11 12a11 11 0 0 1 22 0"/></svg>','<svg viewBox="-16 -16 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><circle r="12.5"/><path d="M-4-6.5 7 0-4 6.5z" fill="currentColor"/></svg>','<svg viewBox="0 0 16 16" fill="currentColor"><path d="'+GHP+'"/></svg>'][i];
 function tex(p){const c=document.createElement('canvas');c.width=1536;c.height=864;const g=c.getContext('2d');g.scale(2,2);
-rr(g,6,6,756,420,28);g.fillStyle='rgba(8,10,18,.74)';g.fill();
-const gr=g.createLinearGradient(0,0,768,432);gr.addColorStop(0,p.c+'55');gr.addColorStop(.5,p.c+'08');gr.addColorStop(1,p.c+'33');g.fillStyle=gr;g.fill();
-g.lineWidth=3;g.strokeStyle=p.c;g.stroke();
-g.fillStyle=p.c;g.font='600 26px '+FN;g.fillText(p.k,48,92);
-g.fillStyle='#f4efe6';g.font='600 58px '+FN;g.fillText(p.t,48,200);
-g.fillStyle='#9a9488';g.font='400 24px '+FN;g.fillText(p.s,48,258);
-g.fillStyle=p.c;g.font='600 64px '+FN;g.fillText('↗',768-48-64,376);
+const I=P.indexOf(p),ls=v=>{if('letterSpacing' in g)g.letterSpacing=v};
+rr(g,6,6,756,420,28);g.fillStyle='rgba(8,10,18,.8)';g.fill();
+g.save();g.clip();
+let gr=g.createLinearGradient(0,0,768,432);gr.addColorStop(0,p.c+'44');gr.addColorStop(.55,p.c+'06');gr.addColorStop(1,p.c+'2a');g.fillStyle=gr;g.fillRect(0,0,768,432);
+gr=g.createRadialGradient(690,40,0,690,40,260);gr.addColorStop(0,p.c+'38');gr.addColorStop(1,p.c+'00');g.fillStyle=gr;g.fillRect(0,0,768,432);
+gr=g.createLinearGradient(40,0,728,0);gr.addColorStop(0,p.c+'00');gr.addColorStop(.5,p.c);gr.addColorStop(1,p.c+'00');g.fillStyle=gr;g.fillRect(0,6,768,3);
+g.restore();
+rr(g,6,6,756,420,28);g.lineWidth=2;g.strokeStyle=p.c+'99';g.stroke();
+rr(g,48,40,64,64,18);g.fillStyle=p.c+'22';g.fill();g.lineWidth=2;g.strokeStyle=p.c+'77';g.stroke();
+g.save();g.translate(80,72);g.strokeStyle=g.fillStyle=p.c;g.lineWidth=3.4;g.lineCap=g.lineJoin='round';
+if(p.ic===0){g.beginPath();g.arc(0,-10,8,0,7);g.stroke();g.beginPath();g.arc(0,22,17,3.6,5.82);g.stroke()}
+else if(p.ic===1){g.beginPath();g.arc(0,0,19,0,7);g.stroke();g.beginPath();g.moveTo(-5.5,-9);g.lineTo(9.5,0);g.lineTo(-5.5,9);g.closePath();g.fill()}
+else{g.scale(2.3,2.3);g.translate(-8,-8);g.fill(new Path2D(GHP))}
+g.restore();
+if(p.live){g.beginPath();g.arc(106,46,7,0,7);g.lineWidth=4;g.strokeStyle='#0a0e1c';g.stroke();g.fillStyle='#4ade80';g.fill()}
+g.fillStyle=p.c;g.font='600 21px '+FN;ls('3px');g.fillText(p.k,128,80);
+g.textAlign='right';g.fillStyle='#9a9488';g.fillText('0'+(I+1)+' / 0'+P.length,720,80);g.textAlign='left';ls('0px');
+g.fillStyle='#f4efe6';g.font='600 58px '+FN;g.fillText(p.t,48,204);
+g.fillStyle='#9a9488';g.font='400 24px '+FN;g.fillText(p.s,48,250);
+g.fillStyle='#ffffff1f';g.fillRect(48,276,672,1.5);
+g.font='600 18px '+FN;let x=48;
+for(const s of p.ch){const w=g.measureText(s).width+28;if(x+w>720)break;rr(g,x,296,w,36,18);g.fillStyle='#ffffff0d';g.fill();g.lineWidth=1.5;g.strokeStyle=p.c+'55';g.stroke();g.fillStyle='#d8d2c4';g.fillText(s,x+14,320);x+=w+10}
+g.fillStyle=p.c;g.font='600 24px '+FN;g.fillText(p.cta,48,385);
+g.beginPath();g.arc(694,376,28,0,7);g.fillStyle=p.c;g.fill();
+g.save();g.translate(694,376);g.strokeStyle='#070a14';g.lineWidth=3.6;g.lineCap=g.lineJoin='round';g.beginPath();g.moveTo(-8,8);g.lineTo(8,-8);g.moveTo(-3,-8);g.lineTo(8,-8);g.lineTo(8,3);g.stroke();g.restore();
 const t=new THREE.CanvasTexture(c);t.anisotropy=Math.min(8,R.capabilities.getMaxAnisotropy());return t}
 const A=P.map((_,i)=>.4+i*1.25),Y=[1.6,-1.4,1.8];
 const BP=A.map((a,i)=>new THREE.Vector3(17*Math.cos(a),Y[i],17*Math.sin(a)));
@@ -157,7 +180,10 @@ const rc=new THREE.Raycaster(),mv=new THREE.Vector2(9,9);let dn=null;
 const setM=e=>{const r=cv.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1)};
 const pick=()=>{rc.setFromCamera(mv,cam);return rc.intersectObjects(PM.filter(m=>m.visible&&m.userData.cap<.01))[0]};
 const canClick=()=>clk<0&&!po&&cl((cur-.66)/.26)<.05;
-function show(i){pc.innerHTML=PG[i];pg.scrollTop=0;pg.className='on'}
+function show(i){const c=P[i].c,n=(i+1)%N,v=(i+N-1)%N;
+pg.style.setProperty('--pa',c);pg.style.setProperty('--pb',c+'22');pg.style.setProperty('--pc',c+'55');
+pc.innerHTML=`<div class="ph"><span class="pi">${IC(i)}</span><span class="pk">${P[i].k}</span><span class="pn">0${i+1} / 0${N}</span></div>${PG[i]}<hr><div class="row ft">${GO(v,'← '+P[v].t)}${GO(n,P[n].t+' →')}</div><p class="ft-c">© 2026 Muhammet Ali</p>`;
+pg.scrollTop=0;pg.className='on'}
 function go(i){clk=i;clkT=cur;gsap.killTweensOf(KK);
 gsap.to(KK,{v:1,duration:4.2,ease:'power2.in',onUpdate(){K=KK.v;if(K>.93&&!po){po=1;show(i)}}})}
 function reset(){gsap.killTweensOf(KK);scrollTo(0,0);S.t=0;cur=0;K=0;KK.v=0;Dp=0;clk=-1;ex=0;end.style.opacity=0;end.style.pointerEvents='none';gsap.set('#hero',{opacity:1,y:0})}
